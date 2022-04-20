@@ -34,18 +34,18 @@ There are three main functions available for `Ombre`:
 
 # Returns the block of text marked up with colors to create a horizontal gradient from left to right
 Ombre.horizontal(from_color, to_color, text)
-Ombre.horizontal("FF0000", "0000FF", "Horizontal Ombre From Red To Blue")
+Ombre.horizontal("FF0000", "0000FF", "############\n#          #\n# Horiz. ###\n# Ombre ####\n# Test #####\n# From #####\n# Red ######\n# To #######\n# Blue #####\n#          #\n############")
 
 # Returns the block of text marked up with colors to create a vertical gradient from top to bottom
 Ombre.vertical(from_color, to_color, text)
-Ombre.vertical("FF0000", "0000FF", "Vertical\nOmbre\nTest\nFrom\nRed\nTo\nBlue")
+Ombre.vertical("FF0000", "0000FF", "############\n#          #\n# Vertical #\n# Ombre ####\n# Test #####\n# From #####\n# Red ######\n# To #######\n# Blue #####\n#          #\n############")
 
 # Returns the block of text marked up with colors to create a diagonal gradient
 Ombre.diagonal(from_color, to_color, text)
 # from top-left to bottom-right by default
-Ombre.diagonal("FF0000", "0000FF", "############\n#          #\n# Vertical #\n# Ombre ####\n# Test #####\n# From #####\n# Red ######\n# To #######\n# Blue #####\n#          #\n############")
+Ombre.diagonal("FF0000", "0000FF", "############\n#          #\n# Diagonal #\n# Ombre ####\n# Test #####\n# From #####\n# Red ######\n# To #######\n# Blue #####\n#          #\n############")
 # from bottom-left to top-right changing the last argument
-Ombre.diagonal("FF0000", "0000FF", "############\n#          #\n# Vertical #\n# Ombre ####\n# Test #####\n# From #####\n# Red ######\n# To #######\n# Blue #####\n#          #\n############", "up")
+Ombre.diagonal("FF0000", "0000FF", "############\n#          #\n# Diagonal #\n# Ombre ####\n# Test #####\n# From #####\n# Red ######\n# To #######\n# Blue #####\n#          #\n############", "up")
 ```
 
 
