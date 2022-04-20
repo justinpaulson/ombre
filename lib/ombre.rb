@@ -50,6 +50,6 @@ class Ombre
   end
 
   def self.color_text r, g, b, text
-    "\x1b[38;2;#{r.to_i};#{g.to_i};#{b.to_i}m#{text}"
+    "\x1b[38;2;#{r.to_i};#{g.to_i};#{b.to_i}m#{text}\x1b[0m"
   end
 end
