@@ -1,20 +1,28 @@
 class Ombre
   def self.vertical color1, color2, text
-    red1, green1, blue1 = get_colors(color1)
-    red2, green2, blue2 = get_colors(color2)
-    r_step, g_step, b_step = get_steps(color1, color2, text.lines.count)
     text.lines.each_with_index.map do |line, i|
-      color_text (red1 + i * r_step), (green1 + i * g_step), (blue1 + i * b_step), line
+      red, green, blue = get_offset_color color1, color2, i/text.lines.count.to_f
+      color_text red, green, blue, line
     end.join
   end
 
   def self.horizontal color1, color2, text
-    red1, green1, blue1 = get_colors(color1)
-    red2, green2, blue2 = get_colors(color2)
-    r_step, g_step, b_step = get_steps(color1, color2, text.lines.max.length)
     text.lines.map do |line|
-      line.chars.each_with_index.map do |line, i|
-        color_text (red1 + i * r_step), (green1 + i * g_step), (blue1 + i * b_step), line
+      line.chars.each_with_index.map do |char, i|
+        red, green, blue = get_offset_color color1, color2, i/text.lines.max.length.to_f
+        color_text red, green, blue, char
+      end.join
+    end.join
+  end
+
+  def self.diagonal color1, color2, text, dir="down"
+    max_y = text.lines.count
+    max_x = text.lines.max.length
+    text.lines.each_with_index.map do |line, y|
+      line.chars.each_with_index.map do |char, x|
+        ratio = dir=="down" ? (y + x)/(max_y + max_x).to_f : (max_y - y + x)/(max_y + max_x).to_f
+        red, green, blue = get_offset_color color1, color2, ratio
+        color_text red, green, blue, char
       end.join
     end.join
   end
@@ -29,10 +37,16 @@ class Ombre
     [red, green, blue]
   end
 
-  def self.get_steps c1, c2, i
+  def self.get_offset_color c1, c2, ratio
     r1, g1, b1 = get_colors c1
     r2, g2, b2 = get_colors c2
-    [(r2-r1)/i.to_f, (g2-g1)/i.to_f, (b2-b1)/i.to_f]
+    r_dist = (r1-r2).abs * ratio
+    red = r1 > r2 ? r1 - r_dist : r1 + r_dist
+    g_dist = (g1-g2).abs * ratio
+    green = g1 > g2 ? g1 - g_dist : g1 + g_dist
+    b_dist = (b1-b2).abs * ratio
+    blue = b1 > b2 ? b1 - b_dist : b1 + b_dist
+    [red, green, blue]
   end
 
   def self.color_text r, g, b, text
